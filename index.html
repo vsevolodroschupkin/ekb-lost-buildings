@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
-  <title>Исчезнувшие здания Екатеринбурга</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Исчезнувшие здания Екатеринбурга</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=7272b37b-ea30-4f26-a805-8c385c269023
+    &lang=ru_RU" type="text/javascript"></script>
 </head>
 <body>
-  <header>
-    <h1>Исчезнувшие здания Екатеринбурга</h1>
-    <p> <i> Интерактивная карта исчезнувших архитектурных объектов города </i> </p>
-  </header>
+    <header>
+      <h1>Исчезнувшие здания Екатеринбурга</h1>
+      <p> <i> Интерактивная карта исчезнувших архитектурных объектов города </i> </p>
+    </header>
+    <main>
+      <div id="map"></div>
+      <div class="panel">
+          <h1>Объекты культурного наследия Екатеринбурга</h1>
+          
+          <div class="filter-group">
+              <div class="slider-value" id="year-value">Год: 2020</div>
+              <div class="slider-container">
+                  <div id="year-slider" class="year-slider"></div>
+                  <div class="slider-labels">
+                      <span>1990</span>
+                      <span>2020</span>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="filter-group">
+              <label>
+                  <input type="checkbox" id="show-existing" checked> Показать сохранившиеся
+              </label>
+          </div>
+          
+          <div class="object-info" id="object-info">
+              Выберите объект на карте
+          </div>
+      </div>
+    </main>
+    <footer>
+      <p class="footer-copyright"> ©Самарцева Ксения, 2025 </p>
+    </footer>
 
-  <main>
-    <div id="map"></div>
-  </main>
-
-  <footer>
-    <p> Самарцева Ксения </p>
-  </footer>
-
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="map/map.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>
+    <script src="js/data.js" type="module"></script>
+    <script src="js/slider.js" type="module"></script>
+    <script src="js/app.js" type="module"></script>
 </body>
 </html>
