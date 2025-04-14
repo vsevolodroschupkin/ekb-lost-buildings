@@ -22,6 +22,7 @@ export function initApp() {
     
     // Начальное состояние - 1991 год, объектов нет
     filterObjects(1991); // Инициализация с текущим годом
+    setupDetailsPanel();
 }
 
 // Функция фильтрации объектов по году
@@ -108,28 +109,54 @@ function configureObjectStyles() {
 }
 
 // функция показа информации
+// Обновляем функцию показа информации
 function showObjectInfo(object) {
     const detailsHtml = `
         <h2>${object.properties.name}</h2>
-        <p><strong>Адрес:</strong> ${object.properties.address || 'не указан'}</p>
-        <p><strong>Год постройки:</strong> ${object.properties.yearBuilt || 'неизвестен'}</p>
-        <p><strong>Год сноса:</strong> ${object.properties.yearDemolished || 'не снесен'}</p>
-        <p><strong>Описание:</strong> ${object.properties.description || 'нет описания'}</p>
-        
-        ${object.properties.photo ? 
-            `<img src="${object.properties.photo}" alt="${object.properties.name}">` : 
-            '<p>Нет изображения</p>'}
-        
-        <div class="additional-info">
-            ${object.properties.history ? `<p>${object.properties.history}</p>` : ''}
+        <div class="details-grid">
+            <div class="detail-item">
+                <span class="detail-label">Описание:</span>
+                <span>${object.properties.description || 'не указан'}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Год постройки:</span>
+                <span>${object.properties.yearBuilt || 'не указан'}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Адрес:</span>
+                <span>${object.properties.address || 'не указан'}</span>
+            </div>
+            <!-- остальные поля -->
         </div>
+        ${object.properties.photo ? 
+            `<img src="${object.properties.photo}" class="building-photo" alt="${object.properties.name}">` : ''}
     `;
     
     detailsContent.innerHTML = detailsHtml;
+    
+    // Показываем панель и overlay
+    document.getElementById('overlay').style.display = 'block';
     detailsPanel.style.display = 'block';
     
-    // Прокручиваем к верху панели
-    detailsPanel.scrollTop = 0;
+    // Блокируем прокрутку страницы
+    document.body.style.overflow = 'hidden';
+}
+
+// Обработчик закрытия
+function setupDetailsPanel() {
+    const closeDetails = () => {
+        document.getElementById('overlay').style.display = 'none';
+        detailsPanel.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    };
+    
+    document.getElementById('close-details').addEventListener('click', closeDetails);
+    document.getElementById('overlay').addEventListener('click', closeDetails);
+    
+    // Закрытие по ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDetails();
+    });
 }
 
 // Обработчик клика по объектам

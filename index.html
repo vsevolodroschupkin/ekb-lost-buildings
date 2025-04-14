@@ -6,6 +6,10 @@
     <title>Исчезнувшие здания Екатеринбурга</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
     <script src="https://api-maps.yandex.ru/2.1/?apikey=7272b37b-ea30-4f26-a805-8c385c269023
     &lang=ru_RU" type="text/javascript"></script>
 </head>
@@ -19,7 +23,7 @@
     <main>
       <div class="main-container">
         <div class="panel control-panel">
-          <h3 class="control-panel-header">Фильтр сноса ОКН</h3>
+          <h3 class="control-panel-header">Как мы теряем памятники архитектуры</h3>
             <p class="control-panel-description">Чем ближе к 2025 году, тем больше зданий мы теряем</p>
             <div class="filter-group">
               <div class="slider-value" id="year-value">Год: 2020</div>
@@ -49,5 +53,7 @@
     <script src="js/data.js" type="module"></script>
     <script src="js/slider.js" type="module"></script>
     <script src="js/app.js" type="module"></script>
+    <div class="overlay" id="overlay"></div>
+
 </body>
 </html>

@@ -43,15 +43,6 @@ body, html {
   height: 200px;
 }
 
-.details-panel {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 300px;
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
 .close-btn {
   position: absolute;
   top: 5px;
@@ -78,15 +69,6 @@ body, html {
   height: auto;
   margin: 10px 0;
   border-radius: 3px;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  .details-panel {
-      width: calc(100% - 40px);
-      left: 10px;
-      right: 10px;
-  }
 }
 
 
@@ -175,5 +157,42 @@ select, button {
       right: 10px;
       left: 10px;
       max-width: none;
+  }
+}
+
+.details-panel {
+  position: fixed; /* Изменяем с absolute на fixed */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  display: none; /* Скрыто по умолчанию */
+  z-index: 1001; /* Выше других элементов */
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Затемнение фона */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: none;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 600px) {
+  .details-panel {
+      width: 95%;
+      max-height: 90vh;
   }
 }

@@ -45,11 +45,11 @@ export const heritageObjects = {
             "id": 3,
             "geometry": {
                 "type": "Point",
-                "coordinates": []
+                "coordinates": [56.826797, 60.596460]
             },
             "properties": {
                 "name": "Дом мещанина Ивана Холмогорова",
-                "description": "Деревянный двухэтажный дом Иван Холмогоров возвел в 1907 году, после получения в 1906 году одобрения.",
+                "description": "Деревянный особняк 1907 года постройки, являлся выявленным объектом культурного наследия.​Несмотря на статус, здание было снесено.​",
                 "yearBuilt": 1907,
                 "yearDemolished": 2016,
                 "status": "lost",
@@ -74,7 +74,8 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Куйбышева, 42​",
-                "type": "architecture"
+                "type": "architecture",
+                "photo": "images/4.jpg"
             }
         },
         {
@@ -105,14 +106,13 @@ export const heritageObjects = {
             },
             "properties": {
                 "name": "Дом купцов Блохиных",
-                "description": "Усадьба второй половины XIX века, ранее в ней жила Прасковья Блохина.​​",
+                "description": "Усадьба второй половины XIX века, ранее в ней жила Прасковья Блохина.​Снесён для строительства делового квартала «Екатеринбург-Сити».​​",
                 "yearBuilt": null,
                 "yearDemolished": 2018,
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Октябрьской Революции, 38а​​",
                 "type": "architecture"
-              
             }
           },
         {
@@ -130,7 +130,8 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Цвиллинга​​​",
-                "type": "industrial"
+                "type": "industrial",
+                "photo": "images/7.jpg"
               
             }
           },
@@ -149,7 +150,8 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Куйбышева, 151​​​",
-                "type": "architecture"
+                "type": "architecture",
+                "photo": "images/8.jpg"
               
             }
           },
