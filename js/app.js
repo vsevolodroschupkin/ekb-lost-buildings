@@ -5,6 +5,9 @@ import { initSlider } from './slider.js';
 let map;
 let objectManager;
 let allLostObjects = [];
+const detailsPanel = document.getElementById('details-panel');
+const detailsContent = document.getElementById('details-content');
+const closeDetailsBtn = document.getElementById('close-details');
 
 // Инициализация приложения
 export function initApp() {
@@ -44,14 +47,16 @@ export function filterObjectsByYear(year) {
 function initMap() {
     map = new ymaps.Map('map', {
         center: [56.838011, 60.597465], // Екатеринбург
-        zoom: 13
+        zoom: 15,
+        minZoom:15,
+        maxZoom: 18
     });
 }
 
 // Инициализация менеджера объектов
 function initObjectManager() {
     objectManager = new ymaps.ObjectManager({
-        clusterize: true,
+        clusterize: false,
         gridSize: 32,
         clusterDisableClickZoom: true
     });
@@ -69,26 +74,62 @@ function configureObjectStyles() {
         return feature?.properties?.[property] ?? defaultValue;
     };
 
-    objectManager.objects.options.set({
-        preset: feature => {
-            const status = safeStyleGetter(feature, 'status', 'existing');
-            return status === 'existing' ? 'islands#greenDotIcon' : 'islands#redDotIcon';
-        },
-        iconColor: feature => {
-            const status = safeStyleGetter(feature, 'status', 'existing');
-            return status === 'existing' ? '#0E4779' : '#FF0000';
-        },
-        strokeColor: feature => {
-            const status = safeStyleGetter(feature, 'status', 'existing');
-            return status === 'existing' ? '#0E4779' : '#FF0000';
-        },
-        fillColor: feature => {
-            const status = safeStyleGetter(feature, 'status', 'existing');
-            return status === 'existing' 
-                ? 'rgba(14, 71, 121, 0.3)' 
-                : 'rgba(255, 0, 0, 0.3)';
+    // Создаем свою иконку
+    const lostIconLayout = ymaps.templateLayoutFactory.createClass(
+        '<div class="custom-marker">' +
+            '<img src="images/demolition.png" alt="" style="width: 32px; height: 32px;">' +
+            '<div class="custom-marker-date">{{ properties.yearDemolished }}</div>' +
+        '</div>',
+        {
+            // Дополнительные методы для обработки
+            build: function() {
+                this.constructor.superclass.build.call(this);
+                this._element = this.getParentElement().querySelector('.custom-marker');
+            },
+            clear: function() {
+                this.constructor.superclass.clear.call(this);
+            }
         }
+    );
+    
+    objectManager.objects.options.set({
+        iconLayout: lostIconLayout, // Используем наш кастомный layout
+        iconShape: { // Область клика
+            type: 'Circle',
+            coordinates: [0, 0],
+            radius: 16
+        },
+        // Отключаем стандартные пресеты
+        iconWidth: 32,
+        iconHeight: 32,
+        preset: 'islands#transparentIcon',
+        iconOffset: [-16, -16] // Центрирование иконки
     });
+}
+
+// функция показа информации
+function showObjectInfo(object) {
+    const detailsHtml = `
+        <h2>${object.properties.name}</h2>
+        <p><strong>Адрес:</strong> ${object.properties.address || 'не указан'}</p>
+        <p><strong>Год постройки:</strong> ${object.properties.yearBuilt || 'неизвестен'}</p>
+        <p><strong>Год сноса:</strong> ${object.properties.yearDemolished || 'не снесен'}</p>
+        <p><strong>Описание:</strong> ${object.properties.description || 'нет описания'}</p>
+        
+        ${object.properties.photo ? 
+            `<img src="${object.properties.photo}" alt="${object.properties.name}">` : 
+            '<p>Нет изображения</p>'}
+        
+        <div class="additional-info">
+            ${object.properties.history ? `<p>${object.properties.history}</p>` : ''}
+        </div>
+    `;
+    
+    detailsContent.innerHTML = detailsHtml;
+    detailsPanel.style.display = 'block';
+    
+    // Прокручиваем к верху панели
+    detailsPanel.scrollTop = 0;
 }
 
 // Обработчик клика по объектам
@@ -97,25 +138,16 @@ function setupObjectClickHandler() {
         const objectId = e.get('objectId');
         const object = objectManager.objects.getById(objectId);
         showObjectInfo(object);
+        
+        // Центрируем карту на объекте
+        map.setCenter(object.geometry.coordinates);
     });
 }
 
-// Показать информацию об объекте
-function showObjectInfo(object) {
-    let infoHtml = `
-        <strong>${object.properties.name}</strong><br>
-        <em>${object.properties.description}</em><br>
-        Год постройки: ${object.properties.yearBuilt}<br>
-        Адрес: ${object.properties.address}<br>
-        Состояние: ${object.properties.preservation}
-    `;
-    
-    if (object.properties.yearDemolished) {
-        infoHtml += `<br>Год сноса: ${object.properties.yearDemolished}`;
-    }
-    
-    document.getElementById('object-info').innerHTML = infoHtml;
-}
+//Обработчик закрытия панели
+closeDetailsBtn.addEventListener('click', () => {
+    detailsPanel.style.display = 'none';
+});
 
 // Функция фильтрации объектов
 export function filterObjects(year) {

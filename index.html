@@ -13,29 +13,29 @@
     <header>
       <div class="container">
       <h1>Исчезнувшие здания Екатеринбурга</h1>
-      <p> <i> Интерактивная карта исчезнувших архитектурных объектов города </i> </p>
+      <p>Интерактивная карта объектов культурного наследия в период с 1991 по 2025 год.</p>
       </div>
     </header>
     <main>
-      <div class="panel">
-        <h3>Объекты культурного наследия Екатеринбурга</h1>
-          
-          <div class="filter-group">
-            <div class="slider-value" id="year-value">Год: 2020</div>
-            <div class="slider-container">
-              <div id="year-slider" class="year-slider"></div>
-              <div class="slider-labels">
-                <span>1990</span>
-                <span>2020</span>
+      <div class="main-container">
+        <div class="panel control-panel">
+          <h3 class="control-panel-header">Фильтр сноса ОКН</h3>
+            <p class="control-panel-description">Чем ближе к 2025 году, тем больше зданий мы теряем</p>
+            <div class="filter-group">
+              <div class="slider-value" id="year-value">Год: 2020</div>
+              <div class="slider-container">
+                <div id="year-slider" class="year-slider"></div>
+                <div class="slider-labels">
+                  <span>1990</span>
+                  <span>2025</span>
+                </div>
               </div>
             </div>
           </div>
-          
-        
-          
-          <div class="object-info" id="object-info">
-            Выберите объект на карте
-          </div>
+        </div>
+        <div class="panel details-panel" id="details-panel" style="display: none;">
+          <button class="close-btn" id="close-details">×</button>
+          <div class="details-content" id="details-content"></div>
         </div>
         <div id="map"></div>
     </main>

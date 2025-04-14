@@ -5,10 +5,10 @@ export function initSlider() {
     const yearValue = document.getElementById('year-value');
     
     noUiSlider.create(yearSlider, {
-        start: [1991],
+        start: [1999],
         connect: [true, false],
         range: {
-            'min': 1990,
+            'min': 1999,
             'max': 2025
         },
         step: 1,

@@ -17,7 +17,8 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Белинского, 3",
-                "type": "architecture"
+                "type": "architecture",
+                "photo": "images/1.jpg"
             }
         },
         {
@@ -35,7 +36,8 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Красноармейская, 18",
-                "type": "architecture"
+                "type": "architecture",
+                "photo": "images/2.jpg"
             }
         },
         {
@@ -53,7 +55,8 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Куйбышева, 41",
-                "type": "architecture"
+                "type": "architecture",
+                "photo": "images/3.jpg"
             }
         },
         {
@@ -83,13 +86,14 @@ export const heritageObjects = {
             },
             "properties": {
                 "name": "Кинотеатр «Темп»",
-                "description": "Первый звуковой и широкоэкранный кинотеатр города.​",
+                "description": "Первый звуковой и широкоэкранный кинотеатр города. Снесён для строительства жилого комплекса.​​",
                 "yearBuilt": null,
                 "yearDemolished": 2018,
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. 22-го Партсъезда, 10​",
-                "type": "culture"
+                "type": "culture",
+                "photo": "images/5.jpg"
             }
         },
         {
@@ -107,7 +111,7 @@ export const heritageObjects = {
                 "status": "lost",
                 "preservation": "Утрачен",
                 "address": "ул. Октябрьской Революции, 38а​​",
-                "type": "architecturer"
+                "type": "architecture"
               
             }
           },
@@ -116,18 +120,73 @@ export const heritageObjects = {
             "id": 7,
             "geometry": {
               "type": "Point",
-              "coordinates": []
+              "coordinates": [56.815734, 60.626056]
             },
             "properties": {
-                "name": "Дом купцов Блохиных",
-                "description": "Усадьба второй половины XIX века, ранее в ней жила Прасковья Блохина.​​",
+                "name": "Завод имени Воровского",
+                "description": "Предприятие, занимающееся буровыми установками, располагалось рядом с ЦПКиО.​Снесён для строительства жилого квартала с высотками.​​",
                 "yearBuilt": null,
                 "yearDemolished": 2018,
                 "status": "lost",
                 "preservation": "Утрачен",
-                "address": "ул. Октябрьской Революции, 38а​​",
-                "type": "architecturer"
+                "address": "ул. Цвиллинга​​​",
+                "type": "industrial"
               
+            }
+          },
+        {
+            "type": "Feature",
+            "id": 8,
+            "geometry": {
+              "type": "Point",
+              "coordinates": [56.830022, 60.646034]
+            },
+            "properties": {
+                "name": "Старинное здание станции Шарташ",
+                "description": "Деревянное здание железнодорожной станции, где находились пригородные кассы.​Снесено после запуска нового модуля с кассами и залом ожидания.​​​",
+                "yearBuilt": null,
+                "yearDemolished": 2017,
+                "status": "lost",
+                "preservation": "Утрачен",
+                "address": "ул. Куйбышева, 151​​​",
+                "type": "architecture"
+              
+            }
+          },
+        {
+            "type": "Feature",
+            "id": 9,
+            "geometry": {
+              "type": "Point",
+              "coordinates": [56.856997, 60.641329]
+            },
+            "properties": {
+                "name": "Дом детского творчества (Дом пионеров)",
+                "description": "Здание долгое время стояло заброшенным. Снесено для строительства жилого дома «Культура».​​​​​",
+                "yearBuilt": null,
+                "yearDemolished": 2017,
+                "status": "lost",
+                "preservation": "Утрачен",
+                "address": "ул. Советская, 47в​​​​",
+                "type": "culture"
+            }
+          },
+        {
+            "type": "Feature",
+            "id": 10,
+            "geometry": {
+              "type": "Point",
+              "coordinates": [56.836869, 60.567920]
+            },
+            "properties": {
+                "name": "Техникум Верх-Исетского завода",
+                "description": "Конструктивистское здание, снесено несмотря на просьбы общественников приостановить работы. На его месте планируется строительство трехсекционного дома с 32-этажной высоткой.​​​​​",
+                "yearBuilt": null,
+                "yearDemolished": 2020,
+                "status": "lost",
+                "preservation": "Утрачен",
+                "address": "ул. Нагорная, 12​​​​​",
+                "type": "culture"
             }
           }
     ]
