@@ -11,38 +11,38 @@
 </head>
 <body>
     <header>
+      <div class="container">
       <h1>Исчезнувшие здания Екатеринбурга</h1>
       <p> <i> Интерактивная карта исчезнувших архитектурных объектов города </i> </p>
+      </div>
     </header>
     <main>
-      <div id="map"></div>
       <div class="panel">
-          <h1>Объекты культурного наследия Екатеринбурга</h1>
+        <h3>Объекты культурного наследия Екатеринбурга</h1>
           
           <div class="filter-group">
-              <div class="slider-value" id="year-value">Год: 2020</div>
-              <div class="slider-container">
-                  <div id="year-slider" class="year-slider"></div>
-                  <div class="slider-labels">
-                      <span>1990</span>
-                      <span>2020</span>
-                  </div>
+            <div class="slider-value" id="year-value">Год: 2020</div>
+            <div class="slider-container">
+              <div id="year-slider" class="year-slider"></div>
+              <div class="slider-labels">
+                <span>1990</span>
+                <span>2020</span>
               </div>
+            </div>
           </div>
           
-          <div class="filter-group">
-              <label>
-                  <input type="checkbox" id="show-existing" checked> Показать сохранившиеся
-              </label>
-          </div>
+        
           
           <div class="object-info" id="object-info">
-              Выберите объект на карте
+            Выберите объект на карте
           </div>
-      </div>
+        </div>
+        <div id="map"></div>
     </main>
     <footer>
-      <p class="footer-copyright"> ©Самарцева Ксения, 2025 </p>
+      <div class="container">
+        <p class="footer-copyright"> ©Самарцева Ксения, 2025 </p>
+      </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.5.0/nouislider.min.js"></script>

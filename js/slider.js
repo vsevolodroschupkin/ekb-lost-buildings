@@ -5,11 +5,11 @@ export function initSlider() {
     const yearValue = document.getElementById('year-value');
     
     noUiSlider.create(yearSlider, {
-        start: [2020],
+        start: [1991],
         connect: [true, false],
         range: {
             'min': 1990,
-            'max': 2020
+            'max': 2025
         },
         step: 1,
         tooltips: [true],
@@ -29,8 +29,10 @@ export function initSlider() {
         filterObjects(year);
     });
 
+    /*
     document.getElementById('show-existing').addEventListener('change', function() {
         const year = Math.round(yearSlider.noUiSlider.get());
         filterObjects(year);
     });
+    */
 }

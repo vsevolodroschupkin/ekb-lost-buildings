@@ -4,21 +4,47 @@ import { initSlider } from './slider.js';
 // Глобальные переменные приложения
 let map;
 let objectManager;
+let allLostObjects = [];
 
 // Инициализация приложения
 export function initApp() {
     initMap();
-    initSlider();
     initObjectManager();
+    initSlider();    
     setupControls();
-    filterObjects(2020); // Инициализация с текущим годом
+    // Фильтруем только утраченные объекты
+    allLostObjects = heritageObjects.features.filter(
+        obj => obj.properties.status === 'lost'
+    );
+    
+    // Начальное состояние - 1991 год, объектов нет
+    filterObjects(1991); // Инициализация с текущим годом
+}
+
+// Функция фильтрации объектов по году
+export function filterObjectsByYear(year) {
+    if (!objectManager) return;
+    
+    // Фильтруем объекты, которые были снесены к выбранному году
+    const filteredObjects = allLostObjects.filter(
+        obj => obj.properties.yearDemolished <= year
+    );
+    
+    // Обновляем карту
+    objectManager.removeAll();
+    objectManager.add({
+        type: "FeatureCollection",
+        features: filteredObjects
+    });
+    
+    console.log(`Показано объектов: ${filteredObjects.length} из ${allLostObjects.length}`);
 }
 
 // Инициализация карты
 function initMap() {
     map = new ymaps.Map('map', {
         center: [56.838011, 60.597465], // Екатеринбург
-        zoom: 12
+        zoom: 13
     });
 }
 
@@ -39,22 +65,28 @@ function initObjectManager() {
 
 // Настройка стилей объектов
 function configureObjectStyles() {
+    const safeStyleGetter = (feature, property, defaultValue) => {
+        return feature?.properties?.[property] ?? defaultValue;
+    };
+
     objectManager.objects.options.set({
-        preset: function(feature) {
-            return feature.properties.status === 'existing' ? 
-                'islands#greenDotIcon' : 'islands#redDotIcon';
+        preset: feature => {
+            const status = safeStyleGetter(feature, 'status', 'existing');
+            return status === 'existing' ? 'islands#greenDotIcon' : 'islands#redDotIcon';
         },
-        iconGlyphSize: 30,
-        iconColor: function(feature) {
-            return feature.properties.status === 'existing' ? '#0E4779' : '#FF0000';
+        iconColor: feature => {
+            const status = safeStyleGetter(feature, 'status', 'existing');
+            return status === 'existing' ? '#0E4779' : '#FF0000';
         },
-        strokeColor: function(feature) {
-            return feature.properties.status === 'existing' ? '#0E4779' : '#FF0000';
+        strokeColor: feature => {
+            const status = safeStyleGetter(feature, 'status', 'existing');
+            return status === 'existing' ? '#0E4779' : '#FF0000';
         },
-        strokeWidth: 2,
-        fillColor: function(feature) {
-            return feature.properties.status === 'existing' ? 
-                'rgba(14, 71, 121, 0.3)' : 'rgba(255, 0, 0, 0.3)';
+        fillColor: feature => {
+            const status = safeStyleGetter(feature, 'status', 'existing');
+            return status === 'existing' 
+                ? 'rgba(14, 71, 121, 0.3)' 
+                : 'rgba(255, 0, 0, 0.3)';
         }
     });
 }
@@ -87,26 +119,21 @@ function showObjectInfo(object) {
 
 // Функция фильтрации объектов
 export function filterObjects(year) {
-    const showExisting = document.getElementById('show-existing').checked;
-    const features = heritageObjects.features;
-    const filteredFeatures = [];
+    if (!objectManager) return;
     
-    for (const feature of features) {
-        if (feature.properties.status === 'existing') {
-            if (showExisting) {
-                filteredFeatures.push(feature);
-            }
-        } 
-        else if (feature.properties.yearDemolished && feature.properties.yearDemolished <= year) {
-            filteredFeatures.push(feature);
-        }
-    }
+    // Фильтруем объекты, которые были снесены к выбранному году
+    const filteredObjects = allLostObjects.filter(
+        obj => obj.properties.yearDemolished <= year
+    );
     
+    // Обновляем карту
     objectManager.removeAll();
     objectManager.add({
-        "type": "FeatureCollection",
-        "features": filteredFeatures
+        type: "FeatureCollection",
+        features: filteredObjects
     });
+    
+    console.log(`Показано объектов: ${filteredObjects.length} из ${allLostObjects.length}`);
 }
 
 // Настройка элементов управления картой
@@ -119,7 +146,7 @@ function setupControls() {
     map.controls.add('zoomControl');
     map.controls.add('rulerControl');
     
-    map.behaviors.enable('scrollZoom');
+    //map.behaviors.enable('scrollZoom');
 }
 
 // Инициализация приложения после загрузки API Яндекс.Карт
